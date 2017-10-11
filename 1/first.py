@@ -1,13 +1,13 @@
-from math import exp, sin, pi
+from math import log, sin, pi
 import matplotlib.pyplot as plt
 
-p = lambda x: (1.0+x)/(2.0-x)
-q =	lambda x: 1.0+exp(-x)
-f = lambda x: 1.0+sin((pi/2.0)*x)
+p = lambda x: (1.0+x**2)
+q =	lambda x: log(1+x)
+f = lambda x: 1.0+x
 
-alpha = [1.0, 0.0]
-beta = [0.5, 1.0]
-A, B = 1.0, 1.0
+alpha = [0.0, 0.5]
+beta = [1.0, 0.0]
+A, B = 1.0, 0.0
 
 
 def thomas_algorithm(N, a = 0.0, b = 1.0):
@@ -47,4 +47,4 @@ def plot_result(N):
 	plt.plot(x, y)
 	plt.show()
 
-plot_result(1200)
+plot_result(200)
