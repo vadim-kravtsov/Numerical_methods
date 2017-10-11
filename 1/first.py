@@ -1,17 +1,17 @@
 from math import log, sin, pi
 import matplotlib.pyplot as plt
 
-p = lambda x: (1.0+x**2)
-q =	lambda x: log(1+x)
-f = lambda x: 1.0+x
+p = lambda x: 1.0/x
+q =	lambda x: 0.5*(x/x)
+f = lambda x: 0.5*(x**2) - log(x) + 4.0
 
-alpha = [0.0, 0.5]
-beta = [1.0, 0.0]
-A, B = 1.0, 0.0
+alpha = [1.0, 1.0]
+beta = [1.0, -0.5]
+A, B = 1.0, 1.1137
 
 
 def thomas_algorithm(N, a = 0.0, b = 1.0):
-	X = [float(j)/N for j in xrange(N+1)]
+	X = [a+float(j)*(b-a)/N for j in xrange(N+1)]
 	Y = [0.0 for i in xrange(N+1)]
 	m, k, c, d = [], [], [], []
 	h = (b - a)/N
@@ -25,7 +25,6 @@ def thomas_algorithm(N, a = 0.0, b = 1.0):
 	grid = ((j[0], float(j[1])/N) for j in enumerate(xrange(1, N-1)))
 	
 	for (i, x) in grid:
-		print i,x
 		m.append(-2.0 + h*p(x))
 		k.append(1.0 - h*p(x) + (h**2)*q(x))
 		c.append(1.0/(m[i] - k[i]*c[i-1]))
@@ -35,16 +34,15 @@ def thomas_algorithm(N, a = 0.0, b = 1.0):
 	
 	for i in xrange(N-1,0,-1):
 		Y[i] = c[i-1]*(d[i-1] - Y[i+1])
-		print Y[i]
 	Y[0] = (alpha[1]*Y[1] - A*h)/dif
 	return X, Y
 
-def plot_result(N):
-	x, y = thomas_algorithm(N)
+def plot_result(N, a = 0.0, b = 1.0):
+	x, y = thomas_algorithm(N, a, b)
 	plt.ylabel('y')
 	plt.xlabel('x')
 	plt.grid(True)
 	plt.plot(x, y)
 	plt.show()
 
-plot_result(200)
+plot_result(50, 1.0, 2.0)
