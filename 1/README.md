@@ -12,7 +12,7 @@
 
 ![Link](http://latex.codecogs.com/png.latex?a,b,p(x),q(x),f(x),\alpha_0,\alpha_1,\beta_0,\beta_1,&space;A,&space;B)  
 
-in our programm.
+#### in our programm.
 
 ## Sample:
 
