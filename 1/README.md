@@ -1,6 +1,6 @@
-# 1. Second order ODE with boundary conditions.
+# Second order ODE with boundary conditions.
 
-We want to solve any ODE like this:
+#### We want to solve any ODE like this:
 
 ![Link](http://latex.codecogs.com/png.latex?y''(x)&plus;p(x)y'(x)&plus;q(x)y(x)&space;=&space;f(x))
 
@@ -8,15 +8,15 @@ We want to solve any ODE like this:
 
 ![Link](http://latex.codecogs.com/png.latex?\beta_0y(b)&plus;\beta_1y'(b)=B)
 
-All we need is enter:
+#### All we need is enter:
 
 ![Link](http://latex.codecogs.com/png.latex?a,b,p(x),q(x),f(x),\alpha_0,\alpha_1,\beta_0,\beta_1,&space;A,&space;B)  
 
 in our programm.
 
-### Sample:
+## Sample:
 
-For:
+#### For:
 
 ![Link](http://latex.codecogs.com/png.latex?y''&plus;\frac{1}{x}y'&plus;\frac{1}{2}y&space;=&space;\frac{1}{2}x^2&space;-&space;\ln{x}&space;&plus;&space;4)
 
@@ -24,7 +24,7 @@ For:
 
 ![Link](http://latex.codecogs.com/png.latex?y(1)-\frac{1}{2}y'(1)=1.1137)
 
-We have:
+#### We have:
 ```python
 p = lambda x: 1.0/x
 q = lambda x: 0.5
