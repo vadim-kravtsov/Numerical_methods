@@ -2,7 +2,7 @@ from math import log, sin, pi
 import matplotlib.pyplot as plt
 
 p = lambda x: 1.0/x
-q =	lambda x: 0.5*(x/x)
+q = lambda x: 0.5*(x/x)
 f = lambda x: 0.5*(x**2) - log(x) + 4.0
 
 alpha = [1.0, 1.0]
