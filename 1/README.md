@@ -34,3 +34,13 @@ alpha = [1.0, 1.0]
 beta = [1.0, -0.5]
 A, B = 1.0, 1.1137
 ```
+
+#### And run programm:
+
+```bash
+python first.py
+```
+
+#### As a result we have file 'result.png':
+
+![result.png](https://github.com/vadim-kravtsov/Numerical_methods/blob/master/1/result.png)
