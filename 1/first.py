@@ -1,15 +1,16 @@
 from math import log, sin, pi, exp
 import matplotlib.pyplot as plt
 
-p = lambda x: 0.0
-q = lambda x: -4.0
-f = lambda x: 0.0
+p = lambda x: 1.0/x
+q = lambda x: 0.5
+f = lambda x: 0.5*(x**2) - log(x) + 4.0
 
-alpha = [0.0, 1.0]
-beta = [1.0, 0.0]
-A, B = 1.0, 2.0
+alpha = [1.0, 1.0]
+beta = [1.0, -0.5]
+A, B = 1.0, 1.1137
+a, b = 1.0, 2.0
 
-def thomas_algorithm(N, a = 0.0, b = 1.0, A = A, B = B ):
+def thomas_algorithm(N, a = a, b = b, A = A, B = B ):
 	X = [a+float(j)*(b-a)/N for j in xrange(N+1)]
 	Y = [0.0 for i in xrange(N+1)]
 	m, k, c, d = [], [], [], []
@@ -40,14 +41,16 @@ plt.title('The graphs of the solution of equation:')
 plt.ylabel('y')
 plt.xlabel('x')
 plt.grid(True)
-	
-def plot_result(N, a = 0.0, b = 1.0, A = A, B = B):
+plt.xlim(a,b)
+
+
+def plot_result(N, a = a, b = b, A = A, B = B):
 	x, y = thomas_algorithm(N, a, b, A, B)
 	plt.plot(x, y)
 	
 for i in xrange(10):
-	plot_result(50, 0.0, 1.0, 1.0+float(i)/10, 1.0+float(i)/10)
+	plot_result(50, a, b, 1.0+float(i)/10, 1.0+float(i)/10)
 
-
+plt.savefig('result.png')
 plt.show()
 

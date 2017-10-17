@@ -33,6 +33,7 @@ f = lambda x: 0.5*(x**2) - log(x) + 4.0
 alpha = [1.0, 1.0]
 beta = [1.0, -0.5]
 A, B = 1.0, 1.1137
+a, b = 1.0, 2.0
 ```
 
 #### And run programm:
