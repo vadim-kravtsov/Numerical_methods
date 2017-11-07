@@ -1,6 +1,6 @@
 import math
 
-def half_devide_method(f, a = -10e5, b = 10e5, e = 0.0000001):
+def half_devide_method(f, a = -100.0, b = 100.0, e = 0.000000000001):
     x = (a + b) / 2
     while math.fabs(f(x)) >= e:
         x = (a + b) / 2
