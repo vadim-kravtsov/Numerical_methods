@@ -1,12 +1,13 @@
 import matplotlib.pyplot as plt
 from half_devide import half_devide_method
+from simple_iter import *
 from math import sqrt
 
 a, b  = [0.0, 1.0]
 theta = 0.5
 
 def main(N):
-	A = -10.0 
+	A = -1000.0 
 	h = (b-a)/N
 	
 	X = [a+i*h for i in xrange(N+1)]
@@ -23,8 +24,8 @@ def main(N):
 	grid = ((j[0], a+float(j[1])*(b-a)/N) for j in enumerate(xrange(0, N)))
 	
 	for (i, x) in grid:
-		F = lambda y: Y[i]*c[0] + y*c[1] + Z[i]*c[2] + c[3]*G(X[i]) + h/2.0*sqrt((theta*y+(1.0-theta)*Y[i])**2+1.0)
-		Y[i+1] = half_devide_method(F)
+		F = lambda y: -(Y[i]*c[0] + Z[i]*c[2] + c[3]*G(X[i]) + h/2.0*sqrt((theta*y+(1.0-theta)*Y[i])**2+1.0))/c[1]
+		Y[i+1] = simple_iter(F)
 		Z[i+1] = (1.0/(1.0-A*h*theta/2.0))*(Z[i]*(1.0+(1.0-theta)*A*h/2.0) 
 			- Y[i]*h*(1.0-theta) 
 			- Y[i+1]*h*theta 
@@ -37,11 +38,15 @@ plt.xlabel('x')
 plt.grid(True)
 plt.xlim(a,b)
 
+N = int(input('Enter N:'))
 def plot_result(N):
 	x, y, z = main(N)
 	plt.plot(x, y)
 	plt.plot(x, z)
-	
-plot_result(1000)
+X, Y, Z = main(N)
+for i in xrange(N):
+	print X[i], Y[i], Z[i] 
+
+plot_result(N)
 plt.savefig('result.png')
 plt.show()
