@@ -4,15 +4,15 @@ from simple_iter import *
 from math import sqrt
 
 a, b  = [0.0, 1.0]
+A = -100.0 
 theta = 0.5
 
-def main(N):
-	A = -1000.0 
+def main(N, a, b, y0 = 1.0, z0 = -10):
 	h = (b-a)/N
 	
 	X = [a+i*h for i in xrange(N+1)]
-	Y = [1.0 for _ in xrange(N+1)]
-	Z = [-10.0 for _ in xrange(N+1)]
+	Y = [y0 for _ in xrange(N+1)]
+	Z = [z0 for _ in xrange(N+1)]
 	
 	c = [0.0, 0.0 , 0.0, 0.0]
 	c[0] = (3.0/4.0*h*(1.0-theta) + (A*theta*(1.0-theta)*h**2/2.0)/(1.0-A*theta*h/2) + 1.0)
@@ -40,13 +40,17 @@ plt.xlim(a,b)
 
 N = int(input('Enter N:'))
 def plot_result(N):
-	x, y, z = main(N)
+	x1, y1, z1 = main(N, a, 1/abs(A)) #boundary layer
+	x2, y2, z2 = main(N, a+1/abs(A), b, y1[-1], z1[-1]) 
+	x = x1+x2
+	y = y1+y2
+	z = z1+z2
 	plt.plot(x, y)
 	plt.plot(x, z)
-X, Y, Z = main(N)
-for i in xrange(N):
-	print X[i], Y[i], Z[i] 
+#X, Y, Z = main(N)
+#for i in xrange(N):
+#	print X[i], Y[i], Z[i] 
 
 plot_result(N)
-plt.savefig('result.png')
+plt.savefig('result-%i.png'%N)
 plt.show()
