@@ -39,7 +39,7 @@ def main():
 	a, b = [0,1]
 	f = lambda x: x+sqrt(1.0+x)
 	n = int(input('Enter n: '))
-	x, y = fredgolm(a,b,f,n,m)
+	x, y = fredgolm(a,b,f,n)
 	plt.grid()
 	plt.plot(x,y,'o')
 	plt.show()
