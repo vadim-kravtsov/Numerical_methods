@@ -16,23 +16,6 @@
 
 #### in our programm.
 
-## Sample:
-
-#### For:
-
-![Link](http://latex.codecogs.com/png.latex?y''&plus;\frac{1}{x}y'&plus;\frac{1}{2}y&space;=&space;\frac{1}{2}x^2&space;-&space;\ln{x}&space;&plus;&space;4)
-
-![Link](http://latex.codecogs.com/png.latex?y(0)&plus;y'(0)=1)
-
-![Link](http://latex.codecogs.com/png.latex?y(1)-\frac{1}{2}y'(1)=1.1137)
-
-#### We have:
-```python
-p = lambda x: 1.0/x
-q = lambda x: 0.5
-f = lambda x: 0.5*(x**2) - log(x) + 4.0
-
-alpha = [1.0, 1.0]
-beta = [1.0, -0.5]
-A, B = 1.0, 1.1137
-```
+## 2. Rigid systems of second-order linear differential equations.
+## 3. Eigenvalues and eigenvectors of matrix.
+## 4. Fredholm Integral Equation of the Second Kind.
