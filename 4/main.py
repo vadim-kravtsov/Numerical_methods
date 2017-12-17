@@ -16,7 +16,7 @@ def chebyshev(x, n):
 		y = 2.0*x*chebyshev(x, n-1)-chebyshev(x, n-2)
 	return y
 
-def fredgolm(a, b, f, n, m):
+def fredgolm(a, b, f, n):
 	'''
 	Solve Fredholm Integral Equations of the Second Kind 
 	by the collocation method.
