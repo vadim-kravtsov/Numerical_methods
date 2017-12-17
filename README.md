@@ -17,5 +17,9 @@
 #### in our programm.
 
 ## 2. Rigid systems of second-order linear differential equations.
+
 ## 3. Eigenvalues and eigenvectors of matrix.
 ## 4. Fredholm Integral Equation of the Second Kind.
+
+![Link](http://latex.codecogs.com/gif.latex?u%28x%29%20-%20%5Cint_%7Ba%7D%5E%7Bb%7DK%28x%2Ct%29%20u%28t%29dt%20%3D%20f%28x%29)
+
