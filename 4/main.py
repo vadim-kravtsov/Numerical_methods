@@ -21,18 +21,23 @@ def fredgolm(a, b, f, n):
 	Solve Fredholm Integral Equations of the Second Kind 
 	by the collocation method.
 	'''
-	x = [cos(k*pi/(n+1)) for k in xrange(n)]
+	x = [(1+cos(k*pi/(n-1)))/2.0 for k in xrange(n)]
 	y = [f(s) for s in x]
 	M = np.zeros((n,n))
 	for i in xrange(n):
 		for j in xrange(n):
 			integr = integrate.quad(lambda t: ((1.0/2.0*x[i]*t 
-				   + sqrt(1.0 + 1.0/12.0*(x[i]+t)))*chebyshev(t,j)), a, b)
-			M[i][j] = chebyshev(x[i],j) - integr[0]
+				   + 2*sqrt(1.0 + 1.0/12.0*(x[i]+t)))*chebyshev(2.0*t-1.0,j)), a, b)
+			M[i][j] = chebyshev(2.0*x[i]-1.0,j) - integr[0]
 	A = np.linalg.solve(M,y)
 	y = []
+	x = np.linspace(a,b,n)
 	for i in xrange(n):
-		y.append(f(x[i])+A[i]*chebyshev(x[i],10))
+		c = 0
+		for j in xrange(n):
+			c += A[j]*chebyshev(x[i],j)
+		y.append(f(x[i])-c)
+		print '%1.8f  %1.8f'%(x[i], y[i])
 	return x, y
 
 def main():
