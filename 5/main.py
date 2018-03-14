@@ -26,37 +26,38 @@ def Ritz(K, f, n, a, b, alpha):
 	B = np.zeros(n)
 	for i in range(n):
 		for j in range(n):
-			firstIntegral = integrate.quad(lambda x: alpha*chebyshev(2.0*x-1.0, i)*chebyshev(2.0*x-1.0, j), a, b) 
-			secondIntegral = integrate.quad(lambda t: K(X[i],t)*chebyshev(2.0*t-1.0, i), a, b)
-			thirdIntegral = integrate.quad(lambda x: (secondIntegral[0]*chebyshev(2.0*x-1.0, j)), a, b)
-			A[i][j] = firstIntegral[0] + thirdIntegral[0]
+			firstIntegral = integrate.quad(lambda x: chebyshev(2.0*x-1.0, i)*chebyshev(2.0*x-1.0, j), a, b) 
+			secondIntegral = integrate.dblquad(lambda x,t: K(x,t)*chebyshev(2.0*t-1.0, i)*chebyshev(2.0*x-1.0, j), a, b, lambda x: a, lambda x: b)
+			A[i][j] = alpha*firstIntegral[0] + secondIntegral[0]
 		integral = integrate.quad(lambda x: f(x)*chebyshev(2.0*x - 1.0, i), a, b) 
 		B[i] = integral[0]
 	#print(A)
+	#print(B)
 	C = solve(A, B)
 	print(C)
+	print(alpha)
+	for line in A:
+		for x in line:
+			print('%1.3f'%x, end = ' ')
+		print('')
 	U = lambda x: sum([C[i]*chebyshev(2.0*x-1.0, i) for i in range(0, len(C))])
 	y = []
 	N = 50
 	x = np.linspace(a,b,N)
 	for i in range(N):
-		#c = 0
-		#for j in range(n):
-		#	#print(U(n, x[j]))
-		#	c += U(n, x[j])#*chebyshev(2.0*x[i]-1,j)
 		y.append(U(x[i]))
-		#print('%1.8f  %1.8f'%(x[i], y[i]))
 	return x, y
 
 def main():
-	al = np.linspace(0.1,0.01,20)
+	al = np.linspace(1e-1,1e-9,5)
 	a, b = [0,1]
+	eps = 1e-10
 	#alpha = 0.005
 	n = int(input('Enter n: '))
-	#al = [0.05, 0.01, 0.005]	
+	#al = [1e-4]	
 	for alpha in al:
 		K = lambda x, t: 1.0/(2.0+x+t)
-		f = lambda x: 1.0/(x+2)*log(2.0*(x+2.0)/(x+3.0))
+		f = lambda x: 1.0/(x+1)*log(2.0*(x+2.0)/(x+3.0))+eps*sin(100*x)
 		X, Y = Ritz(K, f, n, a, b, alpha)
 		#n = [n for _ in range(n)]
 		#Y = list(map(U, n, X))
