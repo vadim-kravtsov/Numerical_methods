@@ -19,7 +19,7 @@ t = [i*tau for i in range(m+1)]
 	
 
 def phi(x):
-	return 1.0/(1+x**2)**2
+	return 1.0/(1.0+x**2)**2
 
 def explicit_method():
 	U = np.empty((m+1, n+1))
@@ -44,7 +44,7 @@ def implicit_method():
 			beta.append((sigma*beta[i-1]+U[k-1][i])/(1+2*sigma+tau-sigma*alpha[i-1]))
 		alpha.append(1)
 		beta.append(0)
-		U[k][n] = beta[n]
+		U[k][n] = ( -alpha[n] * beta[n-1] - beta[n] ) / ( alpha[n] * alpha[n-1] - 1 )
 		for i in range(n-1,-1,-1):
 			U[k][i] = alpha[i]*U[k][i+1]+beta[i]
 	return U
